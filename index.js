@@ -1,6 +1,7 @@
 import * as readline from "node:readline/promises";
 import * as fs from "node:fs/promises";
 import { stdin as input, stdout as output } from "node:process";
+import { calculateCLMW, splitWords } from "./helpers/calculateCLMW.js";
 
 const ccwc = async () => {
   const rl = readline.createInterface({ input, output });
@@ -11,10 +12,8 @@ const ccwc = async () => {
     "Please type filename with location following the syntax below:\nSyntax\nccwc [-clmw] [file ...]\n\nOptions\n-c    The number of bytes in each input file is written to the standard output.\n-l    The number of lines in each input file is written to the standard output.\n-m    The number of characters in each input file is written to the standard output.  If the current locale does not support multi-byte character this is equivalent to the -c option.\n-w    The number of words in each input file is written to the standard output.\n"
   );
 
-  //Clean up and split the words
-  const trimmedAnswer = answer.trim();
-  const regExp = /\s{1,}/;
-  const words = trimmedAnswer.split(regExp);
+  //split the words
+  const words = splitWords(answer);
 
   //Is ccwc present
   const isSyntaxValid = words[0] === "ccwc" && words.length > 1 ? true : false;
@@ -41,7 +40,7 @@ const ccwc = async () => {
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
-      console.log(contents);
+      calculateCLMW(contents);
     } catch (error) {
       console.log(error.message);
     }
