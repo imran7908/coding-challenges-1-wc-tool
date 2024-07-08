@@ -40,6 +40,8 @@ const ccwc = async () => {
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
+      const fileStats = await fs.stat(words[i]);
+      console.log("bytes(c): ", fileStats.size);
       calculateCLMW(contents);
     } catch (error) {
       console.log(error.message);
