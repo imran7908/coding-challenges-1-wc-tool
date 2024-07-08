@@ -10,4 +10,6 @@ export const calculateCLMW = (contents) => {
   console.log("lines: ", totalLines);
   const totalWords = splitWords(contents).length;
   console.log("words: ", totalWords);
+  const totalCharacters = contents.split("").length;
+  console.log("bytes: ", totalCharacters);
 };
