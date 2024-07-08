@@ -36,17 +36,23 @@ const ccwc = async () => {
     }
   }
 
+  const results = [];
+
   //Check if a file exists or not
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
       const fileStats = await fs.stat(words[i]);
-      console.log("bytes(c): ", fileStats.size);
-      calculateLMW(contents);
+      const totalBytes = fileStats.size;
+      const { totalLines, totalWords, totalCharacters } =
+        calculateLMW(contents);
+      results.push([totalLines, totalWords, totalBytes, totalCharacters]);
     } catch (error) {
       console.log(error.message);
     }
   }
+
+  console.log(results);
 
   // end prompt
   closeCcwc();
