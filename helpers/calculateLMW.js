@@ -5,7 +5,7 @@ export const splitWords = (contents) => {
   return splittedWords;
 };
 
-export const calculateCLMW = (contents) => {
+export const calculateLMW = (contents) => {
   const totalLines = contents.split("\n").length - 1;
   console.log("lines(l): ", totalLines);
   const totalWords = splitWords(contents).length;

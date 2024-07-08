@@ -1,7 +1,7 @@
 import * as readline from "node:readline/promises";
 import * as fs from "node:fs/promises";
 import { stdin as input, stdout as output } from "node:process";
-import { calculateCLMW, splitWords } from "./helpers/calculateCLMW.js";
+import { calculateLMW, splitWords } from "./helpers/calculateLMW.js";
 
 const ccwc = async () => {
   const rl = readline.createInterface({ input, output });
@@ -42,7 +42,7 @@ const ccwc = async () => {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
       const fileStats = await fs.stat(words[i]);
       console.log("bytes(c): ", fileStats.size);
-      calculateCLMW(contents);
+      calculateLMW(contents);
     } catch (error) {
       console.log(error.message);
     }
