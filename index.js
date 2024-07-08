@@ -1,4 +1,5 @@
 import * as readline from "node:readline/promises";
+import * as fs from "node:fs/promises";
 import { stdin as input, stdout as output } from "node:process";
 
 const ccwc = async () => {
@@ -30,7 +31,15 @@ const ccwc = async () => {
       return;
     }
   }
-  console.log("Go on");
+
+  for (let i = filesStartIndex; i < words.length; i++) {
+    try {
+      await fs.access(words[i], fs.constants.F_OK);
+      console.log(`${words[i]} exists`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // end prompt
   closeCcwc();
