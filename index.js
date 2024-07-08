@@ -40,10 +40,10 @@ const ccwc = async () => {
   //Check if a file exists or not
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
-      await fs.access(words[i], fs.constants.F_OK);
-      console.log(`${words[i]} exists`);
+      const contents = await fs.readFile(words[i], { encoding: "utf-8" });
+      console.log(contents);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 
