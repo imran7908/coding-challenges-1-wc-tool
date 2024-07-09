@@ -36,9 +36,31 @@ const ccwc = async () => {
     }
   }
 
-  const results = [];
+  //Option optimization
+  let option = "lwc";
+  if (filesStartIndex === 2) {
+    const optionFromPrompt = words[1].slice(1);
+    const uniqueOption = new Set(optionFromPrompt);
+    const optimizedOption = [...uniqueOption].join("");
+    let organizedOption = "";
+    if (optimizedOption.includes("l")) organizedOption += "l";
+    if (optimizedOption.includes("w")) organizedOption += "w";
+    for (let i = optionFromPrompt.length - 1; i >= 0; i--) {
+      if (optionFromPrompt[i] === "c") {
+        organizedOption += "c";
+        break;
+      }
+      if (optionFromPrompt[i] === "m") {
+        organizedOption += "m";
+        break;
+      }
+    }
+    option = organizedOption;
+    console.log(option);
+  }
 
-  //Check if a file exists or not
+  //Calculate CLMW
+  const results = [];
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
