@@ -56,7 +56,6 @@ const ccwc = async () => {
       }
     }
     option = organizedOption;
-    console.log(option);
   }
 
   //Calculate CLMW
@@ -69,6 +68,13 @@ const ccwc = async () => {
       const { totalLines, totalWords, totalCharacters } =
         calculateLMW(contents);
       results.push([totalLines, totalWords, totalBytes, totalCharacters]);
+      console.log(
+        `${option.includes("l") && totalLines}   ${
+          option.includes("w") && totalWords
+        }   ${option.includes("c") && totalBytes}   ${
+          option.includes("m") && totalCharacters
+        }   ${words[i]}`
+      );
     } catch (error) {
       console.log(error.message);
     }
