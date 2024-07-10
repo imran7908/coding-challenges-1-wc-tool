@@ -69,10 +69,10 @@ const ccwc = async () => {
         calculateLMW(contents);
       results.push([totalLines, totalWords, totalBytes, totalCharacters]);
       console.log(
-        `${option.includes("l") && totalLines}   ${
-          option.includes("w") && totalWords
-        }   ${option.includes("c") && totalBytes}   ${
-          option.includes("m") && totalCharacters
+        `${option.includes("l") ? `   ${totalLines}` : ""}${
+          option.includes("w") ? `   ${totalWords}` : ""
+        }${option.includes("c") ? `   ${totalBytes}` : ""}${
+          option.includes("m") ? `   ${totalCharacters}` : ""
         }   ${words[i]}`
       );
     } catch (error) {
