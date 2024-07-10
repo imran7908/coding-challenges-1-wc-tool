@@ -90,6 +90,13 @@ const ccwc = async () => {
     }
   }
 
+  console.log(
+    `${option.includes("l") ? `   ${total.lines}` : ""}${
+      option.includes("w") ? `   ${total.words}` : ""
+    }${option.includes("c") ? `   ${total.bytes}` : ""}${
+      option.includes("m") ? `   ${total.characters}` : ""
+    }   Total`
+  );
   console.log(results);
 
   // end prompt
