@@ -60,6 +60,12 @@ const ccwc = async () => {
 
   //Calculate CLMW
   const results = [];
+  let total = {
+    lines: 0,
+    words: 0,
+    bytes: 0,
+    characters: 0,
+  };
   for (let i = filesStartIndex; i < words.length; i++) {
     try {
       const contents = await fs.readFile(words[i], { encoding: "utf-8" });
@@ -68,6 +74,10 @@ const ccwc = async () => {
       const { totalLines, totalWords, totalCharacters } =
         calculateLMW(contents);
       results.push([totalLines, totalWords, totalBytes, totalCharacters]);
+      total.lines += totalLines;
+      total.words += totalWords;
+      total.bytes += totalBytes;
+      total.characters += totalCharacters;
       console.log(
         `${option.includes("l") ? `   ${totalLines}` : ""}${
           option.includes("w") ? `   ${totalWords}` : ""
